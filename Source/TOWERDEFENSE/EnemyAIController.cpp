@@ -17,4 +17,12 @@ void AEnemyAIController::BeginPlay()
 
 }
 
+void AEnemyAIController::OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result)
+{
+	if (enemy) {
+		enemy->AddCurrentWaypoint();
+		enemy->MoveToWaypoints();
+	}
+}
+
 

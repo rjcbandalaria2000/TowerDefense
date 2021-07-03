@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API AEnemy : public APawn
+class TOWERDEFENSE_API AEnemy : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -18,13 +18,30 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UStaticMeshComponent* staticMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
+	int32 currentWaypoint;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Waypoint")
+	TArray<AActor*> waypoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
+	int32 endWaypoint;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+	void MoveToWaypoints();
+	
+	UFUNCTION()
+	void AddCurrentWaypoint();
+
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 };

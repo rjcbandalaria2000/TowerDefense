@@ -14,4 +14,14 @@ class TOWERDEFENSE_API ATowerDefenseGameModeCPP : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	
+protected: 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Base HP")
+	int32 sharedBaseHP;
+
+public:
+	/*UFUNCTION()
+	int32 GetSharedBaseHP();*/
+
 };

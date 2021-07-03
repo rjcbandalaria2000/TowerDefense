@@ -25,7 +25,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class AEnemy* enemy;
 
-
+	//UFUNCTION()
+	virtual void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override;
 
 public:	
 
