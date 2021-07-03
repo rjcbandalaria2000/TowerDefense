@@ -5,6 +5,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "HealthComponent.h"
+#include "Components/BoxComponent.h"
+#include "Enemy.h"
 
 
 
@@ -16,6 +18,7 @@ APlayerBase::APlayerBase()
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	staticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	healthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
+	boxCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collider"));
 
 	staticMesh->SetupAttachment(RootComponent);
 	AddOwnedComponent(healthComponent);
@@ -26,7 +29,15 @@ APlayerBase::APlayerBase()
 void APlayerBase::BeginPlay()
 {
 	Super::BeginPlay();
+	boxCollider->OnComponentHit.AddDynamic(this, &APlayerBase::OnHitBase);
 	
+}
+
+void APlayerBase::OnHitBase(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
+		OnHit(enemy);
+	}
 }
 
 // Called every frame

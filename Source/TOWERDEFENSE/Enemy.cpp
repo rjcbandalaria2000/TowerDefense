@@ -47,7 +47,6 @@ void AEnemy::MoveToWaypoints()
 					if (waypointIndex) {
 						if (waypointIndex->GetWaypointOrder() == currentWaypoint) {
 							enemyAIController->MoveToActor(waypointIndex, 5.0f, false);
-							//currentWaypoint++;
 							break;
 						}
 					}
@@ -61,6 +60,11 @@ void AEnemy::MoveToWaypoints()
 void AEnemy::AddCurrentWaypoint()
 {
 	currentWaypoint++;
+}
+
+int32 AEnemy::GetDamage()
+{
+	return damage;
 }
 
 // Called to bind functionality to input

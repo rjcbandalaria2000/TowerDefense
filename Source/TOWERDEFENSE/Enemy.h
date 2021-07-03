@@ -31,6 +31,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
 	int32 endWaypoint;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
+	int32 damage;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -40,6 +43,9 @@ public:
 	
 	UFUNCTION()
 	void AddCurrentWaypoint();
+
+	UFUNCTION(BlueprintCallable)
+	int32 GetDamage();
 
 	// Called to bind functionality to input
 	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

@@ -18,11 +18,21 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UStaticMeshComponent* staticMesh;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UHealthComponent* healthComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UBoxComponent* boxCollider;
 	
+	
+	void OnHitBase(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnHit(AEnemy* enemy);
 
 
 public:	
