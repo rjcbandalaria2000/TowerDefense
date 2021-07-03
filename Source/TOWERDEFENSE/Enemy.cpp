@@ -40,7 +40,7 @@ void AEnemy::MoveToWaypoints()
 	AEnemyAIController* enemyAIController = Cast<AEnemyAIController>(GetController());
 
 	if (enemyAIController) {
-		if (currentWaypoint <= waypoints.Num() -1 ) {
+		if (currentWaypoint <= waypoints.Num()) {
 			if (currentWaypoint < endWaypoint) {
 				for (AActor* waypoint : waypoints) {
 					AWaypoint* waypointIndex = Cast<AWaypoint>(waypoint);
