@@ -21,6 +21,7 @@ APlayerBase::APlayerBase()
 	boxCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collider"));
 
 	staticMesh->SetupAttachment(RootComponent);
+	boxCollider->SetupAttachment(RootComponent);
 	AddOwnedComponent(healthComponent);
 
 }
