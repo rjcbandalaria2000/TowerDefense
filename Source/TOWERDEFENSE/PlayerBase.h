@@ -27,10 +27,13 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UBoxComponent* boxCollider;
-	
-	
+
+	/*UFUNCTION(BlueprintCallable)
 	void OnHitBase(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-	
+	*/
+	UFUNCTION(BlueprintCallable)
+	void OnBeginOverlapBase(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnHit(AEnemy* enemy);
 

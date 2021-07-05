@@ -21,7 +21,10 @@ protected:
 	int32 sharedBaseHP;
 
 public:
-	/*UFUNCTION()
-	int32 GetSharedBaseHP();*/
+	UFUNCTION(BlueprintCallable)
+	int32 GetSharedBaseHP();
+
+	UFUNCTION(BlueprintCallable)
+	void TakeDamageBase(int damage);
 
 };

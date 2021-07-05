@@ -23,20 +23,31 @@ APlayerBase::APlayerBase()
 	staticMesh->SetupAttachment(RootComponent);
 	boxCollider->SetupAttachment(RootComponent);
 	AddOwnedComponent(healthComponent);
-
 }
 
 // Called when the game starts or when spawned
 void APlayerBase::BeginPlay()
 {
 	Super::BeginPlay();
-	boxCollider->OnComponentHit.AddDynamic(this, &APlayerBase::OnHitBase);
+	boxCollider->OnComponentBeginOverlap.AddDynamic(this, &APlayerBase::OnBeginOverlapBase);
+	//boxCollider->OnComponentHit.AddDynamic(this, &APlayerBase::OnHitBase);
 	
 }
 
-void APlayerBase::OnHitBase(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+//void APlayerBase::OnHitBase(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+//{
+//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Hit");
+//	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
+//		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Overlap with Enemy");
+//		OnHit(enemy);
+//	}
+//}
+
+void APlayerBase::OnBeginOverlapBase(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Overlapped");
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Overlap with Enemy");
 		OnHit(enemy);
 	}
 }

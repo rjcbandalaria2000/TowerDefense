@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "Enemy.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyDead, class AEnemy*, Enemy);
+
 UCLASS()
 class TOWERDEFENSE_API AEnemy : public ACharacter
 {
@@ -14,13 +16,14 @@ class TOWERDEFENSE_API AEnemy : public ACharacter
 public:
 	// Sets default values for this pawn's properties
 	AEnemy();
+	FEnemyDead enemyDied;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UStaticMeshComponent* staticMesh;
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	//class UStaticMeshComponent* staticMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
 	int32 currentWaypoint;
@@ -33,6 +36,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
 	int32 damage;
+
+	UFUNCTION(BlueprintCallable)
+	void Die();
 
 public:	
 	// Called every frame
