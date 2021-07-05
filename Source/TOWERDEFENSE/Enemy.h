@@ -22,9 +22,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	//class UStaticMeshComponent* staticMesh;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
 	int32 currentWaypoint;
 

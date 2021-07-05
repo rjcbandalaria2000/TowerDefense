@@ -17,9 +17,18 @@ class TOWERDEFENSE_API ATowerDefenseGameModeCPP : public AGameModeBase
 public:
 	
 protected: 
+
+	virtual void BeginPlay() override;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Base HP")
 	int32 sharedBaseHP;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<AActor*> playerBases;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnBaseHit();
+	// Listen to CoreSharedHP for Game Over 
 public:
 	UFUNCTION(BlueprintCallable)
 	int32 GetSharedBaseHP();

@@ -14,9 +14,6 @@ AEnemy::AEnemy()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	//staticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
-
-	//staticMesh->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -29,10 +26,6 @@ void AEnemy::BeginPlay()
 
 void AEnemy::Die()
 {
-	/*enemyDied.Broadcast(this);
-	ATowerDefenseGameModeCPP* gameMode = Cast<ATowerDefenseGameModeCPP>(UGameplayStatics::GetGameMode(GetWorld()));
-	gameMode->TakeDamageBase(1.0f);*/
-
 	this->Destroy();
 }
 
