@@ -26,8 +26,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<AActor*> playerBases;
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnBaseHit();
+	UFUNCTION()
+	void OnBaseHit(class APlayerBase* base);
 	// Listen to CoreSharedHP for Game Over 
 public:
 	UFUNCTION(BlueprintCallable)

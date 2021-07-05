@@ -13,13 +13,15 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 		APlayerBase* base = Cast<APlayerBase>(bases);
 
 		if (base) {
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Binded with OnBaseHit");
 			base->baseHit.AddDynamic(this, &ATowerDefenseGameModeCPP::OnBaseHit);
 		}
 	}
 
 }
 
-void ATowerDefenseGameModeCPP::OnBaseHit()
+
+void ATowerDefenseGameModeCPP::OnBaseHit(APlayerBase* base)
 {
 	TakeDamageBase(1);
 }
