@@ -68,6 +68,26 @@ int32 AEnemy::GetDamage()
 	return damage;
 }
 
+int32 AEnemy::GetCurrentWaypoint()
+{
+	return currentWaypoint;
+}
+
+void AEnemy::SetCurrentWaypoint(int32 intendedWaypointIndex)
+{
+	currentWaypoint = intendedWaypointIndex;
+}
+
+int32 AEnemy::GetEndWaypoint()
+{
+	return endWaypoint;
+}
+
+void AEnemy::SetEndWaypoint(int32 endWaypointIndex)
+{
+	endWaypoint = endWaypointIndex;
+}
+
 // Called to bind functionality to input
 //void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 //{
