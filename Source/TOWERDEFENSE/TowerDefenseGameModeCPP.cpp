@@ -24,6 +24,7 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 void ATowerDefenseGameModeCPP::OnBaseHit(APlayerBase* base)
 {
 	TakeDamageBase(1);
+	enemyKills++;
 }
 
 int32 ATowerDefenseGameModeCPP::GetSharedBaseHP() {
@@ -36,5 +37,12 @@ void ATowerDefenseGameModeCPP::TakeDamageBase(int damage)
 		sharedBaseHP -= damage;
 	}
 }
+
+int32 ATowerDefenseGameModeCPP::GetEnemyKills()
+{
+	return enemyKills;
+}
+
+
 
 

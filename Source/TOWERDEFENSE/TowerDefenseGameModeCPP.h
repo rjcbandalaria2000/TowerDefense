@@ -24,6 +24,9 @@ protected:
 	int32 sharedBaseHP;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 enemyKills;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<AActor*> playerBases;
 
 	UFUNCTION()
@@ -35,5 +38,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void TakeDamageBase(int damage);
+
+	UFUNCTION(BlueprintCallable)
+	int32 GetEnemyKills();
 
 };

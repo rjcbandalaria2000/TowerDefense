@@ -36,7 +36,7 @@ void AEnemySpawner::BeginPlay()
 void AEnemySpawner::SpawnEnemy()
 {
 	if (numOfEnemiesToSpawn > 0) {
-
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "SpawnWave");
 		if (waveData[currentWave]->GetNumOfEnemyTypes() > 0) {
 
 			UWorld* world = GetWorld();
@@ -78,10 +78,12 @@ void AEnemySpawner::Tick(float DeltaTime)
 
 void AEnemySpawner::StartNextWave() {
 	NextWaveTimer.Invalidate();
-	if (currentWave < waveData.Num()) {
+	if (currentWave < waveData.Num() -1) {
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Wave");
 		currentWave++;
-		SpawnEnemy();
 		numOfEnemiesToSpawn = waveData[currentWave]->GetNumOfSpawns();
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Num to spawn: " + numOfEnemiesToSpawn);
+		SpawnEnemy();
 	}
 	else {
 		return;
