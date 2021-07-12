@@ -14,12 +14,12 @@ void AEnemyAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	enemy = Cast<AEnemy>(GetPawn());
-	if (enemy) {
+	/*if (enemy) {
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Casted to Enemy");
 	}
 	else {
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Cast to Enemy Failed");
-	}
+	}*/
 
 }
 

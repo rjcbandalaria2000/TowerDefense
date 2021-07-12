@@ -37,8 +37,25 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Spawn Config")
 	int32 intendedEndWaypoint;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave Data")
+	TArray<class UWaveData*> waveData;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 currentWave = 0;
+
+	UPROPERTY(VisibleAnywhere)
+	//Delay Spawn Timer
+	FTimerHandle SpawnTimer;
+
+	UPROPERTY(VisibleAnywhere)
+	//Spawn Timer
+	FTimerHandle NextWaveTimer;
+
 	UFUNCTION()
 	void SpawnEnemy();
+
+	UFUNCTION()
+	void StartNextWave();
 
 public:	
 	// Called every frame
