@@ -30,4 +30,7 @@ protected:
 
 public:	
 
+	UFUNCTION()
+	void SetControlledEnemy(AEnemy* controlledEnemy);
+
 };

@@ -50,6 +50,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int32 GetDamage();
 
+	UFUNCTION()
+	int32 GetCurrentWaypoint();
+
+	UFUNCTION()
+	void SetCurrentWaypoint(int32 intendedWaypointIndex);
+
+	UFUNCTION()
+	int32 GetEndWaypoint();
+
+	UFUNCTION()
+	void SetEndWaypoint(int32 endWaypointIndex);
+
 	// Called to bind functionality to input
 	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
