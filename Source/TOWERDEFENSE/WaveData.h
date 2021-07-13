@@ -18,7 +18,7 @@ class TOWERDEFENSE_API UWaveData : public UDataAsset
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float duration;
+	float prepDuration;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 numOfSpawns;
@@ -39,7 +39,7 @@ public:
 	int32 TotalKillReward();
 
 	UFUNCTION()
-	float GetDuration();
+	float GetPrepDuration();
 
 	UFUNCTION()
 	int32 GetNumOfSpawns();

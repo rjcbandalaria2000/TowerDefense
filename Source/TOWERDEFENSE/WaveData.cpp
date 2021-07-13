@@ -8,8 +8,8 @@ int32 UWaveData::TotalKillReward() {
 	return killReward * numOfSpawns;
 }
 
-float UWaveData::GetDuration() {
-	return duration;
+float UWaveData::GetPrepDuration() {
+	return prepDuration;
 }
 
 int32 UWaveData::GetNumOfSpawns() {

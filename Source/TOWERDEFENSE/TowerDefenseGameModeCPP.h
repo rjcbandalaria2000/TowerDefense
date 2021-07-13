@@ -27,6 +27,9 @@ protected:
 	int32 enemyKills;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 totalEnemyKills;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<AActor*> playerBases;
 
 	UFUNCTION()
@@ -41,5 +44,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int32 GetEnemyKills();
+
+	UFUNCTION(BlueprintCallable)
+	int32 GetTotalEnemyKills();
+
+	UFUNCTION()
+	void AddEnemyKills();
 
 };

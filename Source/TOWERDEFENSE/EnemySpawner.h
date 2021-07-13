@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "EnemySpawner.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWaveEnd, class AEnemySpawner*, EnemySpawner);
+
 UCLASS()
 class TOWERDEFENSE_API AEnemySpawner : public AActor
 {
@@ -43,6 +45,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 currentWave = 0;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoints")
+	TArray<AActor*> waypoints;
+
 	UPROPERTY(VisibleAnywhere)
 	//Delay Spawn Timer
 	FTimerHandle SpawnTimer;
@@ -50,6 +55,8 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	//Spawn Timer
 	FTimerHandle NextWaveTimer;
+
+
 
 	UFUNCTION()
 	void SpawnEnemy();

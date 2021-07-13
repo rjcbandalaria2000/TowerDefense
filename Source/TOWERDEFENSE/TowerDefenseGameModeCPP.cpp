@@ -43,6 +43,16 @@ int32 ATowerDefenseGameModeCPP::GetEnemyKills()
 	return enemyKills;
 }
 
+int32 ATowerDefenseGameModeCPP::GetTotalEnemyKills()
+{
+	return totalEnemyKills;
+}
+
+void ATowerDefenseGameModeCPP::AddEnemyKills()
+{
+	enemyKills++;
+}
+
 
 
 
