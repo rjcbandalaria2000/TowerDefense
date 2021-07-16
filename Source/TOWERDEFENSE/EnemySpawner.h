@@ -16,6 +16,7 @@ class TOWERDEFENSE_API AEnemySpawner : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AEnemySpawner();
+	FWaveEnd endWave;
 
 protected:
 	// Called when the game starts or when spawned
@@ -61,11 +62,12 @@ protected:
 	UFUNCTION()
 	void SpawnEnemy();
 
-	UFUNCTION()
-	void StartNextWave();
+	
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	UFUNCTION()
+	void StartNextWave();
 
 };

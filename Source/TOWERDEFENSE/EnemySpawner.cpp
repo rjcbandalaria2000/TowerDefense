@@ -20,7 +20,6 @@ AEnemySpawner::AEnemySpawner()
 	arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("EnemySpawnPoint"));
 	staticMesh->SetupAttachment(RootComponent);
 	arrow->SetupAttachment(RootComponent);
-	//currentWave = 0; 
 }
 
 // Called when the game starts or when spawned
@@ -61,11 +60,11 @@ void AEnemySpawner::SpawnEnemy()
 	}
 	else {
 		SpawnTimer.Invalidate();
-		//Gets function to do after the timer expires 
+		/*Gets function to do after the timer expires 
 		FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
-		//Does the Timer
-		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, 5.0f, false);
-
+		Does the Timer
+		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, 5.0f, false);*/
+		endWave.Broadcast(this);
 	}
 }
 
@@ -78,6 +77,12 @@ void AEnemySpawner::Tick(float DeltaTime)
 
 void AEnemySpawner::StartNextWave() {
 	NextWaveTimer.Invalidate();
+
+	//Gets function to do after the timer expires
+		FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
+	//Does the Timer
+		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, 5.0f, false);
+
 	if (currentWave < waveData.Num() -1) {
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Wave");
 		currentWave++;

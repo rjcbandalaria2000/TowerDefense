@@ -4,11 +4,12 @@
 #include "TowerDefenseGameModeCPP.h"
 #include "Kismet/GameplayStatics.h"
 #include "PlayerBase.h"
+#include "EnemySpawner.h"
 
 void ATowerDefenseGameModeCPP::BeginPlay() {
 	Super::BeginPlay();
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerBase::StaticClass(), playerBases);
-	
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemySpawner::StaticClass(), enemySpawners);
 	for (AActor* bases : playerBases) {
 		APlayerBase* base = Cast<APlayerBase>(bases);
 
@@ -20,6 +21,11 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 
 }
 
+
+void ATowerDefenseGameModeCPP::OnWaveEnd(AEnemySpawner* enemySpawner)
+{
+	enemySpawner->StartNextWave();
+}
 
 void ATowerDefenseGameModeCPP::OnBaseHit(APlayerBase* base)
 {

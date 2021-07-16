@@ -32,6 +32,12 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<AActor*> playerBases;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TArray<AActor*> enemySpawners;
+
+	UFUNCTION()
+	void OnWaveEnd(class AEnemySpawner* enemySpawner);
+
 	UFUNCTION()
 	void OnBaseHit(class APlayerBase* base);
 	// Listen to CoreSharedHP for Game Over 
