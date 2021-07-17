@@ -57,17 +57,11 @@ protected:
 	//Spawn Timer
 	FTimerHandle NextWaveTimer;
 
-
-
-	UFUNCTION()
-	void SpawnEnemy();
-
-	
-
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION()
 	void StartNextWave();
-
+	UFUNCTION()
+	void SpawnEnemy();
 };

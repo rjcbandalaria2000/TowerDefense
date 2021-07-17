@@ -14,8 +14,16 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 		APlayerBase* base = Cast<APlayerBase>(bases);
 
 		if (base) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Binded with OnBaseHit");
 			base->baseHit.AddDynamic(this, &ATowerDefenseGameModeCPP::OnBaseHit);
+		}
+	}
+
+	for (AActor* spawners : enemySpawners) {
+		AEnemySpawner* spawner = Cast<AEnemySpawner>(spawners);
+
+		if (spawner) {
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Binded with OnWaveEnd");
+			spawner->endWave.AddDynamic(this, &ATowerDefenseGameModeCPP::OnWaveEnd);
 		}
 	}
 
@@ -24,7 +32,10 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 
 void ATowerDefenseGameModeCPP::OnWaveEnd(AEnemySpawner* enemySpawner)
 {
-	enemySpawner->StartNextWave();
+	totalEnemyKills += enemyKills;
+	enemyKills = 0;
+	//enemySpawner->StartNextWave();
+	enemySpawner->SpawnEnemy();
 }
 
 void ATowerDefenseGameModeCPP::OnBaseHit(APlayerBase* base)

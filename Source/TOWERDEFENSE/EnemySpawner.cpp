@@ -34,6 +34,7 @@ void AEnemySpawner::BeginPlay()
 
 void AEnemySpawner::SpawnEnemy()
 {
+	NextWaveTimer.Invalidate();
 	if (numOfEnemiesToSpawn > 0) {
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "SpawnWave");
 		if (waveData[currentWave]->GetNumOfEnemyTypes() > 0) {
@@ -48,6 +49,8 @@ void AEnemySpawner::SpawnEnemy()
 
 			AEnemyAIController* enemyController = Cast<AEnemyAIController>(enemy->GetController());
 			enemyController->SetControlledEnemy(enemy);
+			//enemyController->AddWaypoints(waypoints);
+			//enemyController->MoveToWaypoint();
 			numOfEnemiesToSpawn--;
 
 			//Gets function to do after the timer expires 
@@ -60,11 +63,11 @@ void AEnemySpawner::SpawnEnemy()
 	}
 	else {
 		SpawnTimer.Invalidate();
-		/*Gets function to do after the timer expires 
+		//Gets function to do after the timer expires 
 		FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
-		Does the Timer
-		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, 5.0f, false);*/
-		endWave.Broadcast(this);
+		//Does the Timer
+		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, waveData[currentWave]->prepDuration, false);
+		//endWave.Broadcast(this);
 	}
 }
 
@@ -76,19 +79,21 @@ void AEnemySpawner::Tick(float DeltaTime)
 }
 
 void AEnemySpawner::StartNextWave() {
-	NextWaveTimer.Invalidate();
+	//NextWaveTimer.Invalidate();
+	
 
-	//Gets function to do after the timer expires
-		FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
-	//Does the Timer
-		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, 5.0f, false);
+	////Gets function to do after the timer expires
+	//	FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
+	////Does the Timer
+	//	GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, 5.0f, false);
 
 	if (currentWave < waveData.Num() -1) {
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Wave");
 		currentWave++;
 		numOfEnemiesToSpawn = waveData[currentWave]->GetNumOfSpawns();
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Num to spawn: " + numOfEnemiesToSpawn);
-		SpawnEnemy();
+		//SpawnEnemy();
+		endWave.Broadcast(this);
 	}
 	else {
 		return;
