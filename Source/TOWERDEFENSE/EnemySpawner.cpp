@@ -9,6 +9,9 @@
 #include "EnemyAIController.h"
 #include "WaveData.h"
 #include "Engine/EngineTypes.h"
+#include "TowerDefenseGameModeCPP.h"
+#include "Kismet/GameplayStatics.h"
+
 
 // Sets default values
 AEnemySpawner::AEnemySpawner()
@@ -36,9 +39,9 @@ void AEnemySpawner::SpawnEnemy()
 {
 	NextWaveTimer.Invalidate();
 	if (numOfEnemiesToSpawn > 0) {
-		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "SpawnWave");
+		
 		if (waveData[currentWave]->GetNumOfEnemyTypes() > 0) {
-
+			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Spawn Enemy");
 			UWorld* world = GetWorld();
 			FActorSpawnParameters spawnParameters;
 			spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
@@ -57,11 +60,10 @@ void AEnemySpawner::SpawnEnemy()
 			FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::SpawnEnemy);
 			//Does the Timer
 			GetWorldTimerManager().SetTimer(SpawnTimer, TimeDelegate, 2.0f, false);
-
-
 		}
 	}
 	else {
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Stop Spawning");
 		SpawnTimer.Invalidate();
 		//Gets function to do after the timer expires 
 		FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
@@ -79,25 +81,22 @@ void AEnemySpawner::Tick(float DeltaTime)
 }
 
 void AEnemySpawner::StartNextWave() {
-	//NextWaveTimer.Invalidate();
+	//ATowerDefenseGameModeCPP* towerGameMode = Cast<ATowerDefenseGameModeCPP>(UGameplayStatics::GetGameMode(GetWorld()));
+	//if (towerGameMode->GetEnemyKills() >= waveData[currentWave]->numOfSpawns) {
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Wave Clear");
+		if (currentWave < waveData.Num() -1) {
+			
+			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Wave");
+			currentWave++;
+			numOfEnemiesToSpawn = waveData[currentWave]->GetNumOfSpawns();
+			endWave.Broadcast(this);
+		}
+
+		else {
+			return;
+		}
+	//}
 	
-
-	////Gets function to do after the timer expires
-	//	FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
-	////Does the Timer
-	//	GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, 5.0f, false);
-
-	if (currentWave < waveData.Num() -1) {
-		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Wave");
-		currentWave++;
-		numOfEnemiesToSpawn = waveData[currentWave]->GetNumOfSpawns();
-		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Num to spawn: " + numOfEnemiesToSpawn);
-		//SpawnEnemy();
-		endWave.Broadcast(this);
-	}
-	else {
-		return;
-	}
 	
 }
 

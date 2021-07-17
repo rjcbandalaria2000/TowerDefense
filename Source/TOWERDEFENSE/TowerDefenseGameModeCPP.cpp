@@ -22,7 +22,6 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 		AEnemySpawner* spawner = Cast<AEnemySpawner>(spawners);
 
 		if (spawner) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Binded with OnWaveEnd");
 			spawner->endWave.AddDynamic(this, &ATowerDefenseGameModeCPP::OnWaveEnd);
 		}
 	}

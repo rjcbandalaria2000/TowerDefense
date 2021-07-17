@@ -40,7 +40,7 @@ protected:
 
 	UFUNCTION()
 	void OnBaseHit(class APlayerBase* base);
-	// Listen to CoreSharedHP for Game Over 
+
 public:
 	UFUNCTION(BlueprintCallable)
 	int32 GetSharedBaseHP();
