@@ -46,14 +46,14 @@ void AEnemySpawner::SpawnEnemy()
 			FActorSpawnParameters spawnParameters;
 			spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 			AEnemy* enemy = world->SpawnActor<AEnemy>(enemyTypes[0], GetActorTransform(), spawnParameters);
-			enemy->SetCurrentWaypoint(intendedWaypoint);
-			enemy->SetEndWaypoint(intendedEndWaypoint);
-			enemy->MoveToWaypoints();
+			//enemy->SetCurrentWaypoint(intendedWaypoint);
+			//enemy->SetEndWaypoint(intendedEndWaypoint);
+			//enemy->MoveToWaypoints();
 
 			AEnemyAIController* enemyController = Cast<AEnemyAIController>(enemy->GetController());
 			enemyController->SetControlledEnemy(enemy);
-			//enemyController->AddWaypoints(waypoints);
-			//enemyController->MoveToWaypoint();
+			enemyController->AddWaypoints(waypoints);
+			enemyController->MoveToWaypoint();
 			numOfEnemiesToSpawn--;
 
 			//Gets function to do after the timer expires 

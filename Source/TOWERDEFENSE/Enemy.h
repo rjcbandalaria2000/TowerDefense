@@ -41,8 +41,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION()
-	void MoveToWaypoints();
+	/*UFUNCTION()
+	void MoveToWaypoints();*/
 	
 	UFUNCTION()
 	void AddCurrentWaypoint();
@@ -61,8 +61,5 @@ public:
 
 	UFUNCTION()
 	void SetEndWaypoint(int32 endWaypointIndex);
-
-	// Called to bind functionality to input
-	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 };

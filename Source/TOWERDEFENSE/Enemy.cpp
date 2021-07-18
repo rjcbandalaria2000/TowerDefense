@@ -21,7 +21,7 @@ void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AWaypoint::StaticClass(), waypoints);
-	MoveToWaypoints();
+	//MoveToWaypoints();
 }
 
 void AEnemy::Die()
@@ -36,27 +36,27 @@ void AEnemy::Tick(float DeltaTime)
 
 }
 
-void AEnemy::MoveToWaypoints()
-{
-	AEnemyAIController* enemyAIController = Cast<AEnemyAIController>(GetController());
-
-	if (enemyAIController) {
-		if (currentWaypoint <= waypoints.Num()) {
-			if (currentWaypoint < endWaypoint) {
-				for (AActor* waypoint : waypoints) {
-					AWaypoint* waypointIndex = Cast<AWaypoint>(waypoint);
-					if (waypointIndex) {
-						if (waypointIndex->GetWaypointOrder() == currentWaypoint) {
-							enemyAIController->MoveToActor(waypointIndex, 5.0f, false);
-							break;
-						}
-					}
-				}
-			}
-			
-		}
-	}
-}
+//void AEnemy::MoveToWaypoints()
+//{
+//	AEnemyAIController* enemyAIController = Cast<AEnemyAIController>(GetController());
+//
+//	if (enemyAIController) {
+//		if (currentWaypoint <= waypoints.Num()) {
+//			if (currentWaypoint < endWaypoint) {
+//				for (AActor* waypoint : waypoints) {
+//					AWaypoint* waypointIndex = Cast<AWaypoint>(waypoint);
+//					if (waypointIndex) {
+//						if (waypointIndex->GetWaypointOrder() == currentWaypoint) {
+//							enemyAIController->MoveToActor(waypointIndex, 5.0f, false);
+//							break;
+//						}
+//					}
+//				}
+//			}
+//			
+//		}
+//	}
+//}
 
 void AEnemy::AddCurrentWaypoint()
 {
@@ -88,10 +88,4 @@ void AEnemy::SetEndWaypoint(int32 endWaypointIndex)
 	endWaypoint = endWaypointIndex;
 }
 
-// Called to bind functionality to input
-//void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-//{
-//	Super::SetupPlayerInputComponent(PlayerInputComponent);
-//
-//}
 

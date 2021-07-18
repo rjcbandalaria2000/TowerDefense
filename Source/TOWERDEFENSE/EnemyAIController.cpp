@@ -15,18 +15,20 @@ void AEnemyAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	enemy = Cast<AEnemy>(GetPawn());
-	//MoveToWaypoint();
+	MoveToWaypoint();
 }
 
 void AEnemyAIController::OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result)
 {
-	if (enemy) {
+	/*if (enemy) {
 		enemy->AddCurrentWaypoint();
 		enemy->MoveToWaypoints();
-	}
-	/*if (enemy) {
-		currentWaypoint++;
 	}*/
+	if (enemy) {
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "MoveToNext");
+		currentWaypoint++;
+		MoveToWaypoint();
+	}
 }
 
 void AEnemyAIController::SetControlledEnemy(AEnemy* controlledEnemy)
@@ -42,23 +44,35 @@ void AEnemyAIController::AddWaypoints(TArray<AActor*> waypointsArray)
 	
 }
 
-//void AEnemyAIController::MoveToWaypoint()
-//{
-//	if (enemy) {
-//		if (currentWaypoint <= waypoints.Num()) {
-//			for (AActor* waypoint : waypoints) {
-//				AWaypoint* waypointIndex = Cast<AWaypoint>(waypoint);
-//				if (waypointIndex) {
-//					if (waypointIndex->GetWaypointOrder() == currentWaypoint) {
-//						MoveToActor(waypointIndex, 5.0f, false);
-//						break;
-//					}
-//				}
-//			}
-//		}
-//	}
-//
-//}
+void AEnemyAIController::MoveToWaypoint()
+{
+	//if (enemy) {
+	//	if (currentWaypoint <= waypoints.Num()) {
+	//		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Current Next");
+	//		for (AActor* waypoint : waypoints) {
+	//			AWaypoint* waypointIndex = Cast<AWaypoint>(waypoint);
+	//			if (waypointIndex) {
+	//				GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Waypoint");
+	//				//if (waypointIndex->GetWaypointOrder() == currentWaypoint) {
+	//					MoveToActor(waypointIndex, 5.0f, false);
+	//					break;
+	//				//}
+	//			}
+	//		}
+	//	}
+	//}
+	if (enemy) {
+		if (currentWaypoint <= waypoints.Num()) {
+			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Current Next");
+			AWaypoint* waypointIndex = Cast<AWaypoint>(waypoints[currentWaypoint]);
+			if (waypointIndex) {
+				GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Waypoint");
+				MoveToActor(waypointIndex, 5.0f, false);
+			}
+			
+		}
+	}
+}
 
 
 

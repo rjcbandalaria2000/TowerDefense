@@ -42,6 +42,6 @@ public:
 	UFUNCTION()
 	void AddWaypoints(TArray<AActor*> waypointsArray);
 
-	/*UFUNCTION()
-	void MoveToWaypoint();*/
+	UFUNCTION()
+	void MoveToWaypoint();
 };
