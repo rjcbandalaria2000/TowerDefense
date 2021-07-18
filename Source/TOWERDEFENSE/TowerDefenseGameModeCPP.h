@@ -57,4 +57,6 @@ public:
 	UFUNCTION()
 	void AddEnemyKills();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void CoreDeath();
 };

@@ -34,11 +34,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner Config")
 	TArray<TSubclassOf<class AEnemy>> enemyTypes;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "Enemy Spawn Config")
+	/*UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "Enemy Spawn Config")
 	int32 intendedWaypoint;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Spawn Config")
-	int32 intendedEndWaypoint;
+	int32 intendedEndWaypoint;*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave Data")
 	TArray<class UWaveData*> waveData;

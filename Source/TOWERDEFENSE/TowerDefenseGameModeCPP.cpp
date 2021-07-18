@@ -33,7 +33,6 @@ void ATowerDefenseGameModeCPP::OnWaveEnd(AEnemySpawner* enemySpawner)
 {
 	totalEnemyKills += enemyKills;
 	enemyKills = 0;
-	//enemySpawner->StartNextWave();
 	enemySpawner->SpawnEnemy();
 }
 
@@ -49,9 +48,14 @@ int32 ATowerDefenseGameModeCPP::GetSharedBaseHP() {
 
 void ATowerDefenseGameModeCPP::TakeDamageBase(int damage)
 {
-	if (sharedBaseHP > 0) {
-		sharedBaseHP -= damage;
+
+	sharedBaseHP -= damage;
+	if (sharedBaseHP <= 0) {
+		sharedBaseHP = 0;
+		CoreDeath();
 	}
+	
+
 }
 
 int32 ATowerDefenseGameModeCPP::GetEnemyKills()
