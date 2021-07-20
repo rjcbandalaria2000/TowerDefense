@@ -35,11 +35,16 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<AActor*> enemySpawners;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FTimerHandle waveEndTimer;
+
 	UFUNCTION()
 	void OnWaveEnd(class AEnemySpawner* enemySpawner);
 
 	UFUNCTION()
 	void OnBaseHit(class APlayerBase* base);
+
+	
 
 public:
 	UFUNCTION(BlueprintCallable)

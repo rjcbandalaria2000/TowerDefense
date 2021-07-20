@@ -25,7 +25,7 @@ void AEnemyAIController::OnMoveCompleted(FAIRequestID RequestID, const FPathFoll
 		enemy->MoveToWaypoints();
 	}*/
 	if (enemy) {
-		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "MoveToNext");
+		//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "MoveToNext");
 		currentWaypoint++;
 		MoveToWaypoint();
 	}
@@ -63,10 +63,8 @@ void AEnemyAIController::MoveToWaypoint()
 	//}
 	if (enemy) {
 		if (currentWaypoint <= waypoints.Num()) {
-			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Current Next");
 			AWaypoint* waypointIndex = Cast<AWaypoint>(waypoints[currentWaypoint]);
 			if (waypointIndex) {
-				GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Waypoint");
 				MoveToActor(waypointIndex, 5.0f, false);
 			}
 			
