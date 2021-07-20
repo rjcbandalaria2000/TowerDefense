@@ -38,6 +38,8 @@ void AEnemySpawner::BeginPlay()
 void AEnemySpawner::SpawnEnemy()
 {
 	NextWaveTimer.Invalidate();
+	//ATowerDefenseGameModeCPP* towerGameMode = Cast<ATowerDefenseGameModeCPP>(UGameplayStatics::GetGameMode(GetWorld()));
+	//if (towerGameMode->GetEnemyKills() >= waveData[currentWave]->numOfSpawns) {
 	if (numOfEnemiesToSpawn > 0) {
 		
 		if (waveData[currentWave]->GetNumOfEnemyTypes() > 0) {
@@ -46,9 +48,6 @@ void AEnemySpawner::SpawnEnemy()
 			FActorSpawnParameters spawnParameters;
 			spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 			AEnemy* enemy = world->SpawnActor<AEnemy>(enemyTypes[0], GetActorTransform(), spawnParameters);
-			//enemy->SetCurrentWaypoint(intendedWaypoint);
-			//enemy->SetEndWaypoint(intendedEndWaypoint);
-			//enemy->MoveToWaypoints();
 
 			AEnemyAIController* enemyController = Cast<AEnemyAIController>(enemy->GetController());
 			enemyController->SetControlledEnemy(enemy);
@@ -100,3 +99,6 @@ void AEnemySpawner::StartNextWave() {
 	
 }
 
+int32 AEnemySpawner::GetCurrentWave() {
+	return currentWave;
+}

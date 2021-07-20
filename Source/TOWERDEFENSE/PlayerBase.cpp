@@ -35,9 +35,7 @@ void APlayerBase::BeginPlay()
 
 void APlayerBase::OnBeginOverlapBase(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Overlapped");
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
-		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Overlap with Enemy");
 		OnHit(enemy);
 		baseHit.Broadcast(this);
 	}

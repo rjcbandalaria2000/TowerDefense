@@ -34,15 +34,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner Config")
 	TArray<TSubclassOf<class AEnemy>> enemyTypes;
 
-	/*UPROPERTY(EditAnywhere, BlueprintReadWrite , Category = "Enemy Spawn Config")
-	int32 intendedWaypoint;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Spawn Config")
-	int32 intendedEndWaypoint;*/
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave Data")
-	TArray<class UWaveData*> waveData;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 currentWave = 0;
 
@@ -60,8 +51,12 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave Data")
+	TArray<class UWaveData*> waveData;
 	UFUNCTION()
 	void StartNextWave();
 	UFUNCTION()
 	void SpawnEnemy();
+	UFUNCTION()
+	int32 GetCurrentWave();
 };

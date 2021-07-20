@@ -22,14 +22,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
-	int32 currentWaypoint;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Waypoint")
 	TArray<AActor*> waypoints;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
-	int32 endWaypoint;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
+	//int32 endWaypoint;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
 	int32 damage;
@@ -41,25 +38,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	/*UFUNCTION()
-	void MoveToWaypoints();*/
-	
-	UFUNCTION()
-	void AddCurrentWaypoint();
 
 	UFUNCTION(BlueprintCallable)
 	int32 GetDamage();
-
-	UFUNCTION()
-	int32 GetCurrentWaypoint();
-
-	UFUNCTION()
-	void SetCurrentWaypoint(int32 intendedWaypointIndex);
-
-	UFUNCTION()
-	int32 GetEndWaypoint();
-
-	UFUNCTION()
-	void SetEndWaypoint(int32 endWaypointIndex);
 
 };
