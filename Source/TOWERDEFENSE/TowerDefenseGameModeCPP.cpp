@@ -33,15 +33,20 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 
 void ATowerDefenseGameModeCPP::OnWaveEnd(AEnemySpawner* enemySpawner)
 {
-	//if(enemyKills >= totalNumOfEnemiesSpawned)
 	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Cyan, FString::FromInt(enemyKills));
-	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Cyan, FString::FromInt(enemySpawner->waveData[enemySpawner->GetCurrentWave()]->numOfSpawns * (enemySpawners.Num() - 1)));
-	if (enemyKills >= enemySpawner->waveData[enemySpawner->GetCurrentWave()]->numOfSpawns * (enemySpawners.Num()-1)) {
-		waveEndTimer.Invalidate();
+	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Cyan, FString::FromInt(enemySpawner->waveData[enemySpawner->GetCurrentWave()]->numOfSpawns * (enemySpawners.Num())));
+	if (enemyKills >= enemySpawner->waveData[enemySpawner->GetCurrentWave()]->numOfSpawns * (enemySpawners.Num())) {
+		
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, "Enemies clear");
 		totalEnemyKills += enemyKills;
 		enemyKills = 0;
-		enemySpawner->SpawnEnemy();
+		//enemySpawner->AddCurrentWave();
+		//enemySpawner->SetNumOfEnemiesToSpawn(enemySpawner->waveData[enemySpawner->GetCurrentWave()]->numOfSpawns);
+		for (int32 i = 0; i < enemySpawners.Num(); i++) {
+			AEnemySpawner* spawner = Cast<AEnemySpawner>(enemySpawners[i]);
+			spawner->StartNextWave();
+		}
+		waveEndTimer.Invalidate();
 	}
 	
 	

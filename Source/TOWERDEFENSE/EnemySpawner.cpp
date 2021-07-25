@@ -64,10 +64,13 @@ void AEnemySpawner::SpawnEnemy()
 	else {
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Stop Spawning");
 		SpawnTimer.Invalidate();
+		if (currentWave < waveData.Num() - 1) {
+			endWave.Broadcast(this);
+		}
 		//Gets function to do after the timer expires 
-		FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
+		//FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::StartNextWave);
 		//Does the Timer
-		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, waveData[currentWave]->prepDuration, false);
+		//GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, waveData[currentWave]->prepDuration, false);
 		//endWave.Broadcast(this);
 	}
 }
@@ -88,7 +91,11 @@ void AEnemySpawner::StartNextWave() {
 			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Wave");
 			currentWave++;
 			numOfEnemiesToSpawn = waveData[currentWave]->GetNumOfSpawns();
-			endWave.Broadcast(this);
+			//endWave.Broadcast(this);
+			//Gets function to do after the timer expires 
+			FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::SpawnEnemy);
+			//Does the Timer
+			GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, waveData[currentWave]->prepDuration, false);
 		}
 
 		else {
@@ -101,4 +108,14 @@ void AEnemySpawner::StartNextWave() {
 
 int32 AEnemySpawner::GetCurrentWave() {
 	return currentWave;
+}
+
+void AEnemySpawner::AddCurrentWave()
+{
+	currentWave++;
+}
+
+void AEnemySpawner::SetNumOfEnemiesToSpawn(int32 numToSpawn)
+{
+	numOfEnemiesToSpawn = numToSpawn;
 }
