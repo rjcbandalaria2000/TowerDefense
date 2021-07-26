@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/SphereComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
 
 // Sets default values
@@ -15,6 +16,7 @@ AProjectile::AProjectile()
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	staticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	bulletCollider = CreateDefaultSubobject<USphereComponent>(TEXT("Bullet Collider"));
+	projectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement"));
 
 	staticMesh->SetupAttachment(RootComponent);
 	bulletCollider->SetupAttachment(RootComponent);

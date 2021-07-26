@@ -40,7 +40,8 @@ void ATurret::OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 {
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
 		targets.Add(enemy);
-		
+		mainTarget = targets[0];
+		ShootTarget();
 	}
 }
 
@@ -67,7 +68,7 @@ void ATurret::Aim()
 		FRotator turretRotation = UKismetMathLibrary::Conv_VectorToRotator(aimDirection);
 
 		turretBarrel->SetWorldRotation(turretRotation);
-
+		arrow->SetWorldRotation(turretRotation);
 		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Aiming");
 	};
 }

@@ -25,6 +25,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class USphereComponent* bulletCollider;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UProjectileMovementComponent* projectileMovement;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)	
 	int32 damage;
 
