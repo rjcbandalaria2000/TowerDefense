@@ -20,7 +20,7 @@ void UHealthComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+	//InitializeHealth();
 }
 
 
@@ -37,5 +37,13 @@ void UHealthComponent::TakeDamage(int32 damage)
 	if (currentHP > 0) {
 		currentHP -= damage;
 	}
+	else {
+		unitDied.Broadcast();
+	}
 }
 
+void UHealthComponent::InitializeHealth() {
+
+	currentHP = maxHP;
+
+}

@@ -62,7 +62,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int32 GetTotalEnemyKills();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void AddEnemyKills();
 
 	UFUNCTION(BlueprintImplementableEvent)

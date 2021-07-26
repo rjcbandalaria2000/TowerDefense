@@ -39,6 +39,18 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<class AProjectile> projectile;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float fireRate;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	float fireTime;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FVector turretAimOffset;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int32 turretDamage;
+
 	UFUNCTION()
 	void OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	

@@ -25,21 +25,25 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Waypoint")
 	TArray<AActor*> waypoints;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoint")
-	//int32 endWaypoint;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
 	int32 damage;
 
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
+	
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly);
+	class UHealthComponent* healthComponent;
 
 	UFUNCTION(BlueprintCallable)
 	int32 GetDamage();
 
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnEnemyDeath();
 };

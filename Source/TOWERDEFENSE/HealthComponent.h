@@ -6,8 +6,9 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeath);
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+
 class TOWERDEFENSE_API UHealthComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -15,6 +16,7 @@ class TOWERDEFENSE_API UHealthComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UHealthComponent();
+	FDeath unitDied;
 
 protected:
 	// Called when the game starts
@@ -23,6 +25,7 @@ protected:
 	int32 currentHP;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 maxHP;
+	
 
 public:	
 	// Called every frame
@@ -31,5 +34,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TakeDamage(int32 damage);
 
+	UFUNCTION()
+	void InitializeHealth();
 		
 };

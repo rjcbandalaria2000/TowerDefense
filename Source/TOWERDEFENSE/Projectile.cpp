@@ -6,7 +6,8 @@
 #include "Components/SceneComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-
+#include "Enemy.h"
+#include "HealthComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -26,7 +27,7 @@ AProjectile::AProjectile()
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	bulletCollider->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnProjectileBeginOverlap);
 }
 
 // Called every frame
@@ -36,3 +37,19 @@ void AProjectile::Tick(float DeltaTime)
 
 }
 
+void AProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+
+	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
+
+		enemy->healthComponent->TakeDamage(projectileDamage);
+		this->Destroy();
+
+	}
+
+}
+
+void AProjectile::SetProjectileDamage(int32 damage) {
+
+	projectileDamage = damage;
+
+}
