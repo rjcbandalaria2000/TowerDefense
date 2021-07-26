@@ -45,6 +45,9 @@ void AProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedCompon
 		this->Destroy();
 
 	}
+	else {
+		this->Destroy();
+	}
 
 }
 

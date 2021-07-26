@@ -63,14 +63,23 @@ void ATurret::OnTargetExitOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 void ATurret::ShootTarget()
 {
-	if (projectile) {
-		UWorld* world = GetWorld();
-		FActorSpawnParameters bulletSpawnParameters;
-		bulletSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	if (mainTarget) {
 
-		AProjectile* turretProjectile = world->SpawnActor<AProjectile>(projectile, arrow->GetComponentTransform(), bulletSpawnParameters);
-		turretProjectile->SetProjectileDamage(turretDamage);
+		if (projectile) {
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Shooting Targer");
+			UWorld* world = GetWorld();
+			FActorSpawnParameters bulletSpawnParameters;
+			bulletSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+			AProjectile* turretProjectile = world->SpawnActor<AProjectile>(projectile, arrow->GetComponentTransform(), bulletSpawnParameters);
+		
+			if (turretProjectile) {
+				turretProjectile->SetProjectileDamage(turretDamage);
+			}
+			
+		}
 	}
+	
 	
 }
 
