@@ -8,6 +8,7 @@
 #include "Components/SphereComponent.h"
 #include "Enemy.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Projectile.h"
 
 
 
@@ -39,6 +40,7 @@ void ATurret::BeginPlay()
 void ATurret::OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Target In Range");
 		targets.Add(enemy);
 		mainTarget = targets[0];
 		ShootTarget();
@@ -47,9 +49,17 @@ void ATurret::OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AAc
 
 void ATurret::OnTargetExitOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Target Out of Range");
 	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
-		targets.Remove(mainTarget);
-		mainTarget = targets[0];
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Target Out of Range");
+		targets.Remove(enemy);
+		if (targets.Num() > 0) {
+			mainTarget = targets[0];
+		}
+		else {
+			mainTarget = NULL;
+		}
+			
 	}
 }
 

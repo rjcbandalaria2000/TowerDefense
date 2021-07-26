@@ -36,10 +36,15 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class AEnemy* mainTarget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<class AProjectile> projectile;
+
 	UFUNCTION()
 	void OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
+	
+	UFUNCTION()
 	void OnTargetExitOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	
 	UFUNCTION()
 	virtual void ShootTarget();
 	
