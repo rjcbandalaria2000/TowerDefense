@@ -11,6 +11,7 @@
 #include "Engine/EngineTypes.h"
 #include "TowerDefenseGameModeCPP.h"
 #include "Kismet/GameplayStatics.h"
+#include "HealthComponent.h"
 
 
 // Sets default values
@@ -48,7 +49,7 @@ void AEnemySpawner::SpawnEnemy()
 			FActorSpawnParameters spawnParameters;
 			spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 			AEnemy* enemy = world->SpawnActor<AEnemy>(enemyTypes[0], GetActorTransform(), spawnParameters);
-
+			enemy->healthComponent->InitializeHealth(waveData[currentWave]->healthMultiplier);
 			AEnemyAIController* enemyController = Cast<AEnemyAIController>(enemy->GetController());
 			enemyController->SetControlledEnemy(enemy);
 			enemyController->AddWaypoints(waypoints);

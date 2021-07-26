@@ -35,6 +35,9 @@ public:
 	void TakeDamage(int32 damage);
 
 	UFUNCTION()
-	void InitializeHealth();
+	void InitializeHealth(int32 healthMultiplier);
+
+	UFUNCTION()
+	int32 GetCurrentHP();
 		
 };
