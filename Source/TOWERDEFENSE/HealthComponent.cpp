@@ -20,7 +20,7 @@ void UHealthComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	//InitializeHealth();
+	
 }
 
 
@@ -34,14 +34,11 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UHealthComponent::TakeDamage(int32 damage)
 {
-	
 	currentHP -= damage;
 	if (currentHP <= 0) {
 		currentHP = 0;
 		unitDied.Broadcast();
 	}
-		
-	
 }
 
 void UHealthComponent::InitializeHealth(int32 healthMultiplier) {

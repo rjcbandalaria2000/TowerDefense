@@ -63,4 +63,6 @@ public:
 	void AddCurrentWave();
 	UFUNCTION()
 	void SetNumOfEnemiesToSpawn(int32 numToSpawn);
+	UFUNCTION()
+	void SetCurrentWave(int32 currentWaveIndex);
 };

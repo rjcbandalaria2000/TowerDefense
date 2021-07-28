@@ -102,7 +102,7 @@ void ATurret::Aim()
 void ATurret::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (targets.Num() > 0) {
+	if (mainTarget != NULL) {
 		mainTarget = targets[0];
 		Aim();
 		

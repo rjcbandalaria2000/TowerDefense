@@ -38,8 +38,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FTimerHandle waveEndTimer;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	FTimerHandle wavePrepTime;
+	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 currentWave = 0;*/
 
 	UFUNCTION()
 	void OnWaveEnd(class AEnemySpawner* enemySpawner);
