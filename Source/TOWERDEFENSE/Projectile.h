@@ -25,12 +25,20 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class USphereComponent* bulletCollider;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)	
-	int32 damage;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UProjectileMovementComponent* projectileMovement;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)	
+	int32 projectileDamage;
+
+	UFUNCTION()
+	void OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION()
+	void SetProjectileDamage(int32 damage);
 
 };

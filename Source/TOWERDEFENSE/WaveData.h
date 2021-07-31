@@ -35,6 +35,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Reward")
 	int32 clearReward;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Enemy Initalization")
+	int32 healthMultiplier;
+
 	UFUNCTION(BlueprintPure, BlueprintCallable)
 	int32 TotalKillReward();
 

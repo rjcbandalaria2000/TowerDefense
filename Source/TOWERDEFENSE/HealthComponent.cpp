@@ -34,8 +34,21 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 void UHealthComponent::TakeDamage(int32 damage)
 {
-	if (currentHP > 0) {
-		currentHP -= damage;
+	currentHP -= damage;
+	if (currentHP <= 0) {
+		currentHP = 0;
+		unitDied.Broadcast();
 	}
 }
 
+void UHealthComponent::InitializeHealth(int32 healthMultiplier) {
+
+	maxHP = maxHP * healthMultiplier;
+	currentHP = maxHP;
+
+}
+
+int32 UHealthComponent::GetCurrentHP()
+{
+	return currentHP;
+}
