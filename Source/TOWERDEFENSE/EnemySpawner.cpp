@@ -44,6 +44,7 @@ void AEnemySpawner::SpawnEnemy()
 			spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 			AEnemy* enemy = world->SpawnActor<AEnemy>(waveData->enemies[0], GetActorTransform(), spawnParameters);
 			enemy->healthComponent->InitializeHealth(waveData->healthMultiplier);
+			enemy->SetDeathGold(waveData->goldMultiplier);
 			AEnemyAIController* enemyController = Cast<AEnemyAIController>(enemy->GetController());
 			enemyController->SetControlledEnemy(enemy);
 			enemyController->AddWaypoints(waypoints);

@@ -44,6 +44,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 gold = 0;
 
+	
 	UFUNCTION()
 	void OnWaveEnd(class AEnemySpawner* enemySpawner);
 
@@ -74,4 +75,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void CoreDeath();
+
+	UFUNCTION()
+	int32 GetGold();
+
+	UFUNCTION()
+	void SetGold(int32 newGold);
 };

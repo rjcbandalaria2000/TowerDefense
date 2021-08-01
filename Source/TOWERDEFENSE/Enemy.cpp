@@ -45,6 +45,11 @@ int32 AEnemy::GetDamage()
 	return damage;
 }
 
+void AEnemy::SetDeathGold(int32 deathGoldMultiplier)
+{
+	deathGold *= deathGoldMultiplier;
+}
+
 
 
 

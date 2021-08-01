@@ -14,17 +14,16 @@ ATowerNode::ATowerNode()
 	PrimaryActorTick.bCanEverTick = true;
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 	staticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
-	turretBuildPoint = CreateDefaultSubobject<UArrowComponent>(TEXT("Turret Build Point"));
 
 	staticMesh->SetupAttachment(RootComponent);
-	turretBuildPoint->SetupAttachment(RootComponent);
+	
 }
 
 // Called when the game starts or when spawned
 void ATowerNode::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	canBuild = true;
 }
 
 // Called every frame

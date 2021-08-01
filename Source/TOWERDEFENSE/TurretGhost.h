@@ -4,29 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TowerNode.generated.h"
+#include "TurretGhost.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API ATowerNode : public AActor
+class TOWERDEFENSE_API ATurretGhost : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATowerNode();
+	ATurretGhost();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class UStaticMeshComponent* staticMesh;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	class ATurret* turretBuilt;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool canBuild;
 
 public:	
 	// Called every frame

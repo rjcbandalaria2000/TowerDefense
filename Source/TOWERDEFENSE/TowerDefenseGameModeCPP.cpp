@@ -47,6 +47,8 @@ void ATowerDefenseGameModeCPP::OnWaveEnd(AEnemySpawner* enemySpawner)
 		
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, "Enemies clear");
 			totalEnemyKills += enemyKills;
+			gold += waveData[currentWave]->TotalKillReward();
+			gold += waveData[currentWave]->clearReward;
 			enemyKills = 0;
 			currentWave++;
 			for (int32 i = 0; i < enemySpawners.Num(); i++) {
@@ -106,6 +108,16 @@ int32 ATowerDefenseGameModeCPP::GetTotalEnemyKills()
 void ATowerDefenseGameModeCPP::AddEnemyKills()
 {
 	enemyKills++;
+}
+
+int32 ATowerDefenseGameModeCPP::GetGold()
+{
+	return gold;
+}
+
+void ATowerDefenseGameModeCPP::SetGold(int32 newGold)
+{
+	gold = newGold;
 }
 
 

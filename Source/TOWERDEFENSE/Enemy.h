@@ -25,8 +25,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Waypoint")
 	TArray<AActor*> waypoints;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
 	int32 damage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
+	int32 deathGold;
 
 	UFUNCTION(BlueprintCallable)
 	void Die();
@@ -43,6 +46,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int32 GetDamage();
 
+	UFUNCTION()
+	void SetDeathGold(int32 deathGoldMultiplier);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnEnemyDeath();
