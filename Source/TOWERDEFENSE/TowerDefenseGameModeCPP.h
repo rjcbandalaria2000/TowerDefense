@@ -38,8 +38,11 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FTimerHandle waveEndTimer;
 
-	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 currentWave = 0;*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 currentWave = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 gold = 0;
 
 	UFUNCTION()
 	void OnWaveEnd(class AEnemySpawner* enemySpawner);
@@ -50,6 +53,10 @@ protected:
 	
 
 public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave Data");
+	TArray<class UWaveData*> waveData;
+
 	UFUNCTION(BlueprintCallable)
 	int32 GetSharedBaseHP();
 

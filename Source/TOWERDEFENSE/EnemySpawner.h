@@ -31,11 +31,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawner Config")
 	int32 numOfEnemiesToSpawn;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner Config")
-	TArray<TSubclassOf<class AEnemy>> enemyTypes;
+	/*UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawner Config")
+	TArray<TSubclassOf<class AEnemy>> enemyTypes;*/
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 currentWave = 0;
+	/*UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 currentWave = 0;*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Waypoints")
 	TArray<AActor*> waypoints;
@@ -51,18 +51,20 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Wave Data")
-	TArray<class UWaveData*> waveData;
+	class UWaveData* waveData;
+
 	UFUNCTION()
 	void StartNextWave();
 	UFUNCTION()
 	void SpawnEnemy();
-	UFUNCTION()
+	/*UFUNCTION()
 	int32 GetCurrentWave();
 	UFUNCTION()
-	void AddCurrentWave();
+	void AddCurrentWave();*/
 	UFUNCTION()
 	void SetNumOfEnemiesToSpawn(int32 numToSpawn);
-	UFUNCTION()
-	void SetCurrentWave(int32 currentWaveIndex);
+	//UFUNCTION()
+	//void SetCurrentWave(int32 currentWaveIndex);
 };

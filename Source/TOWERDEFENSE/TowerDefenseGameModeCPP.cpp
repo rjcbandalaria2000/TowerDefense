@@ -24,6 +24,12 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 		AEnemySpawner* spawner = Cast<AEnemySpawner>(spawners);
 
 		if (spawner) {
+			if (waveData.Num() > 0) {
+				spawner->waveData = waveData[currentWave];
+				spawner->SetNumOfEnemiesToSpawn(waveData[currentWave]->numOfSpawns);
+				spawner->SpawnEnemy();
+			}
+			
 			spawner->endWave.AddDynamic(this, &ATowerDefenseGameModeCPP::OnWaveEnd);
 		}
 	}
@@ -34,29 +40,37 @@ void ATowerDefenseGameModeCPP::BeginPlay() {
 void ATowerDefenseGameModeCPP::OnWaveEnd(AEnemySpawner* enemySpawner)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Cyan, FString::FromInt(enemyKills));
-	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Cyan, FString::FromInt(enemySpawner->waveData[enemySpawner->GetCurrentWave()]->numOfSpawns * (enemySpawners.Num())));
-	if (enemyKills >= enemySpawner->waveData[enemySpawner->GetCurrentWave()]->numOfSpawns * (enemySpawners.Num())) {
+	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Cyan, FString::FromInt(enemySpawner->waveData->numOfSpawns * (enemySpawners.Num())));
+	if (currentWave < waveData.Num() - 1) {
+
+		if (enemyKills >= enemySpawner->waveData->numOfSpawns * (enemySpawners.Num())) {
 		
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, "Enemies clear");
-		totalEnemyKills += enemyKills;
-		enemyKills = 0;
-		//enemySpawner->AddCurrentWave();
-		//enemySpawner->SetNumOfEnemiesToSpawn(enemySpawner->waveData[enemySpawner->GetCurrentWave()]->numOfSpawns);
-		for (int32 i = 0; i < enemySpawners.Num(); i++) {
-			AEnemySpawner* spawner = Cast<AEnemySpawner>(enemySpawners[i]);
-			spawner->StartNextWave();
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, "Enemies clear");
+			totalEnemyKills += enemyKills;
+			enemyKills = 0;
+			currentWave++;
+			for (int32 i = 0; i < enemySpawners.Num(); i++) {
+				AEnemySpawner* spawner = Cast<AEnemySpawner>(enemySpawners[i]);
+				if (waveData.Num() > 0) {
+					spawner->waveData = waveData[currentWave];
+					spawner->SetNumOfEnemiesToSpawn(waveData[currentWave]->numOfSpawns);
+					spawner->StartNextWave();
+				}
+				
+			}
+			waveEndTimer.Invalidate();
 		}
-		waveEndTimer.Invalidate();
-	}
 	
 	
-	else {
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, "Enemies still not clear");
-		//Gets function to do after the timer expires 
-		FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &ATowerDefenseGameModeCPP::OnWaveEnd, enemySpawner);
-		//Does the Timer
-		GetWorldTimerManager().SetTimer(waveEndTimer, TimeDelegate, 2.0f, false);
+		else {
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Cyan, "Enemies still not clear");
+			//Gets function to do after the timer expires 
+			FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &ATowerDefenseGameModeCPP::OnWaveEnd, enemySpawner);
+			//Does the Timer
+			GetWorldTimerManager().SetTimer(waveEndTimer, TimeDelegate, 2.0f, false);
+		}
 	}
+	
 	
 }
 

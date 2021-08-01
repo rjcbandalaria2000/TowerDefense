@@ -30,26 +30,20 @@ AEnemySpawner::AEnemySpawner()
 void AEnemySpawner::BeginPlay()
 {
 	Super::BeginPlay();
-	numOfEnemiesToSpawn = waveData[currentWave]->GetNumOfSpawns();
-	if (waveData.Num()  > 0) {
-		SpawnEnemy();
-	}
 }
 
 void AEnemySpawner::SpawnEnemy()
 {
 	NextWaveTimer.Invalidate();
-	//ATowerDefenseGameModeCPP* towerGameMode = Cast<ATowerDefenseGameModeCPP>(UGameplayStatics::GetGameMode(GetWorld()));
-	//if (towerGameMode->GetEnemyKills() >= waveData[currentWave]->numOfSpawns) {
 	if (numOfEnemiesToSpawn > 0) {
 		
-		if (waveData[currentWave]->GetNumOfEnemyTypes() > 0) {
+		if (waveData->GetNumOfEnemyTypes() > 0) {
 			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Spawn Enemy");
 			UWorld* world = GetWorld();
 			FActorSpawnParameters spawnParameters;
 			spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-			AEnemy* enemy = world->SpawnActor<AEnemy>(enemyTypes[0], GetActorTransform(), spawnParameters);
-			enemy->healthComponent->InitializeHealth(waveData[currentWave]->healthMultiplier);
+			AEnemy* enemy = world->SpawnActor<AEnemy>(waveData->enemies[0], GetActorTransform(), spawnParameters);
+			enemy->healthComponent->InitializeHealth(waveData->healthMultiplier);
 			AEnemyAIController* enemyController = Cast<AEnemyAIController>(enemy->GetController());
 			enemyController->SetControlledEnemy(enemy);
 			enemyController->AddWaypoints(waypoints);
@@ -65,9 +59,7 @@ void AEnemySpawner::SpawnEnemy()
 	else {
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Stop Spawning");
 		SpawnTimer.Invalidate();
-		if (currentWave < waveData.Num() - 1) {
-			endWave.Broadcast(this);
-		}
+		endWave.Broadcast(this);
 	}
 }
 
@@ -80,29 +72,13 @@ void AEnemySpawner::Tick(float DeltaTime)
 
 void AEnemySpawner::StartNextWave() {
 	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Wave Clear");
-	if (currentWave < waveData.Num() -1) {
-			
-		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Wave");
-		currentWave++;
-		numOfEnemiesToSpawn = waveData[currentWave]->GetNumOfSpawns();
-		//Gets function to do after the timer expires 
+	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, "Next Wave");
+	if (waveData) {
 		FTimerDelegate TimeDelegate = FTimerDelegate::CreateUObject(this, &AEnemySpawner::SpawnEnemy);
 		//Does the Timer
-		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, waveData[currentWave]->prepDuration, false);
+		GetWorldTimerManager().SetTimer(NextWaveTimer, TimeDelegate, waveData->prepDuration, false);
 	}
-
-	else {
-		return;
-	}
-}
-
-int32 AEnemySpawner::GetCurrentWave() {
-	return currentWave;
-}
-
-void AEnemySpawner::AddCurrentWave()
-{
-	currentWave++;
+	
 }
 
 void AEnemySpawner::SetNumOfEnemiesToSpawn(int32 numToSpawn)
@@ -110,7 +86,3 @@ void AEnemySpawner::SetNumOfEnemiesToSpawn(int32 numToSpawn)
 	numOfEnemiesToSpawn = numToSpawn;
 }
 
-void AEnemySpawner::SetCurrentWave(int32 currentWaveIndex)
-{
-	currentWave = currentWaveIndex;
-}
