@@ -22,6 +22,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UStaticMeshComponent* staticMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UBoxComponent* boxCollider;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Waypoint")
 	TArray<AActor*> waypoints;
 
