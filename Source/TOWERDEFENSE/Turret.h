@@ -18,6 +18,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UStaticMeshComponent* turretBody;
 
@@ -52,16 +53,22 @@ protected:
 	int32 turretDamage;
 
 	UFUNCTION()
-	void OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	virtual void OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
 	UFUNCTION()
-	void OnTargetExitOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	virtual void OnTargetExitOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
 	UFUNCTION()
 	virtual void ShootTarget();
 	
 	UFUNCTION()
-	void Aim();
+	virtual void Aim();
+
+	UFUNCTION()
+	virtual void OnTargetOverlap(AEnemy* target);
+
+	UFUNCTION()
+	virtual void OnTargetExit(AEnemy* target);
 
 public:	
 	// Called every frame

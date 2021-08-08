@@ -39,31 +39,34 @@ void ATurret::BeginPlay()
 
 void ATurret::OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Target In Range");
-		targets.Add(enemy);
-		mainTarget = targets[0];
-	}
+	//if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
+	//	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Target In Range");
+	//	targets.Add(enemy);
+	//	mainTarget = targets[0];
+	//	OnTargetOverlap(enemy);
+	//}
+	
 }
 
 void ATurret::OnTargetExitOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	
-	if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
-		targets.Remove(enemy);
-		if (targets.Num() > 0) {
-			mainTarget = targets[0];
-		}
-		else {
-			mainTarget = NULL;
-		}
-			
-	}
+	//if (AEnemy* enemy = Cast<AEnemy>(OtherActor)) {
+	//	/*targets.Remove(enemy);
+	//	if (targets.Num() > 0) {
+	//		mainTarget = targets[0];
+	//	}
+	//	else {
+	//		mainTarget = NULL;
+	//	}*/
+	//	OnTargetExit(enemy);
+	//		
+	//}
 }
 
 void ATurret::ShootTarget()
 {
-	if (mainTarget) {
+	/*if (mainTarget) {
 
 		if (projectile) {
 			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Shooting Targer");
@@ -79,40 +82,58 @@ void ATurret::ShootTarget()
 			
 		}
 	}
-	
+	*/
 	
 }
 
 void ATurret::Aim()
 {
-	if (mainTarget) {
-		FVector targetLocation = mainTarget->GetActorLocation() + turretAimOffset;
-		FVector turretLocation = turretBarrel->GetComponentLocation();
-		FVector aimDirection = targetLocation - turretLocation;
-		//FVector targetOffset = FVector(50, 0, 0);
-		FRotator turretRotation = UKismetMathLibrary::Conv_VectorToRotator(aimDirection);
+	//if (mainTarget) {
+	//	FVector targetLocation = mainTarget->GetActorLocation() + turretAimOffset;
+	//	FVector turretLocation = turretBarrel->GetComponentLocation();
+	//	FVector aimDirection = targetLocation - turretLocation;
+	//	//FVector targetOffset = FVector(50, 0, 0);
+	//	FRotator turretRotation = UKismetMathLibrary::Conv_VectorToRotator(aimDirection);
 
-		turretBarrel->SetWorldRotation(turretRotation);
-		arrow->SetWorldRotation(turretRotation);
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Aiming");
-	};
+	//	turretBarrel->SetWorldRotation(turretRotation);
+	//	arrow->SetWorldRotation(turretRotation);
+	//	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Aiming");
+	//};
+}
+
+void ATurret::OnTargetOverlap(AEnemy* target)
+{
+	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Target In Range");
+	//targets.Add(target);
+	//mainTarget = targets[0];
+}
+
+void ATurret::OnTargetExit(AEnemy* target)
+{
+	/*targets.Remove(target);
+	if (targets.Num() > 0) {
+		mainTarget = targets[0];
+	}
+	else {
+		mainTarget = NULL;
+	}*/
 }
 
 // Called every frame
 void ATurret::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (mainTarget != NULL) {
-		mainTarget = targets[0];
-		Aim();
-		
-		if (fireTime <= 0) {
-			ShootTarget();
-			fireTime = 1.0f / fireRate;
-		}
-		else {
-			fireTime -= DeltaTime;
-		}
-	}
+	//if (mainTarget != NULL) {
+	//	mainTarget = targets[0];
+	//	Aim();
+	//	
+	//	if (fireTime <= 0) {
+	//		ShootTarget();
+	//		fireTime = 1.0f / fireRate;
+	//	}
+	//	else {
+	//		fireTime -= DeltaTime;
+	//	}
+	//}
 }
 
