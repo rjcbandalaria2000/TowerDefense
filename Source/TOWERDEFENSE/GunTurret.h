@@ -26,7 +26,7 @@ protected:
 	virtual void ShootTarget() override;
 	
 	virtual void Aim() override;
-	
+
 	virtual void OnTargetOverlap(AEnemy* target) override;
 	
 	virtual void OnTargetExit(AEnemy* target) override;

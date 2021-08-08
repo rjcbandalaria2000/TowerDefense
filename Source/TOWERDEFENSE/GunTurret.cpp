@@ -12,6 +12,8 @@
 
 void AGunTurret::BeginPlay() {
 	Super::BeginPlay();
+	sphereCollider->OnComponentBeginOverlap.AddDynamic(this, &AGunTurret::OnTargetBeginOverlap);
+	sphereCollider->OnComponentEndOverlap.AddDynamic(this, &AGunTurret::OnTargetExitOverlap);
 
 }
 void AGunTurret::OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {

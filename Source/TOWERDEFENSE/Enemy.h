@@ -36,6 +36,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
 	int32 deathGold;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
+	bool isBurning;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
+	bool isSlow;
 
 	UFUNCTION(BlueprintCallable)
 	void Die();

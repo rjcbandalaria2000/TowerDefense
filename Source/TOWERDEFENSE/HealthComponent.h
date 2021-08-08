@@ -16,6 +16,7 @@ class TOWERDEFENSE_API UHealthComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UHealthComponent();
+	UPROPERTY(BlueprintAssignable, Category = "Event Dispatcher")
 	FDeath unitDied;
 
 protected:
