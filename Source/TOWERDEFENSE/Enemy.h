@@ -43,6 +43,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
 	bool isSlow;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
+	bool hasKillBonus;
+
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
