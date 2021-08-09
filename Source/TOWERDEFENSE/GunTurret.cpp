@@ -42,15 +42,15 @@ void AGunTurret::ShootTarget()
 	if (mainTarget) {
 
 		if (projectile) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Shooting Targer");
 			UWorld* world = GetWorld();
 			FActorSpawnParameters bulletSpawnParameters;
 			bulletSpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-			GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Cyan, "Shooting");
 			AProjectile* turretProjectile = world->SpawnActor<AProjectile>(projectile, arrow->GetComponentTransform(), bulletSpawnParameters);
 
 			if (turretProjectile) {
 				turretProjectile->SetProjectileDamage(turretDamage);
+				//turretProjectile->SetTarget(mainTarget);
+				//turretProjectile->LockOnToTarget();
 			}
 
 		}
@@ -70,7 +70,6 @@ void AGunTurret::Aim()
 
 		turretBarrel->SetWorldRotation(turretRotation);
 		arrow->SetWorldRotation(turretRotation);
-		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, "Aiming");
 	};
 
 }

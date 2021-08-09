@@ -31,6 +31,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)	
 	int32 projectileDamage;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class AEnemy* target;
+
 	UFUNCTION()
 	void OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
@@ -41,4 +44,9 @@ public:
 	UFUNCTION()
 	void SetProjectileDamage(int32 damage);
 
+	UFUNCTION()
+	void SetTarget(AEnemy* targetInSight);
+
+	UFUNCTION()
+	void LockOnToTarget();
 };

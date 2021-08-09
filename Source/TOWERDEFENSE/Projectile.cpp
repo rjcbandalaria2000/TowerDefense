@@ -34,7 +34,7 @@ void AProjectile::BeginPlay()
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
 
 void AProjectile::OnProjectileBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
@@ -56,3 +56,16 @@ void AProjectile::SetProjectileDamage(int32 damage) {
 	projectileDamage = damage;
 
 }
+
+void AProjectile::SetTarget(AEnemy* targetInSite)
+{
+	target = targetInSite;
+}
+
+void AProjectile::LockOnToTarget()
+{
+	
+	//projectileMovement->ComputeHomingAcceleration(target->GetActorLocation())
+}
+
+

@@ -33,6 +33,7 @@ ATurret::ATurret()
 void ATurret::BeginPlay()
 {
 	Super::BeginPlay();
+	hasBuffedFireRate = false;
 	/*sphereCollider->OnComponentBeginOverlap.AddDynamic(this, &ATurret::OnTargetBeginOverlap);
 	sphereCollider->OnComponentEndOverlap.AddDynamic(this, &ATurret::OnTargetExitOverlap);*/
 }
