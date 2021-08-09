@@ -40,8 +40,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<class AProjectile> projectile;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fireRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool hasBuffedFireRate;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float fireTime;
