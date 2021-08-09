@@ -46,6 +46,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
 	bool hasKillBonus;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Stats")
+	bool isFlying;
+
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
