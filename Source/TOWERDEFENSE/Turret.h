@@ -55,22 +55,22 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int32 turretDamage;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void OnTargetBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void OnTargetExitOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void ShootTarget();
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void Aim();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void OnTargetOverlap(AEnemy* target);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void OnTargetExit(AEnemy* target);
 
 public:	
